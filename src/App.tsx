@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Loader from "./components/Loader";
+import "./App.css"
 
 // Lazy imports for pages
 const AdminLoginPage = lazy(() => import("./pages/admin/AdminLoginPage"));

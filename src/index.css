@@ -1,8 +1,8 @@
-@import "tailwindcss";
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  --font-Graphik: "Graphik", system-ui, sans-serif;
+/* Custom variables or overrides */
+:root {
+  --font-sans: "Graphik", system-ui, sans-serif;
 }
