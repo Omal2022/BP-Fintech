@@ -5,7 +5,7 @@ import "../../App.css";
 const AdminPasswordSuccessful: React.FC = () => {
   return (
     <section className="form-section">
-      <div className="passwordSuccessful-container ">
+      <div className="passwordSuccessful-container">
         <h3>Password Reset Successful</h3>
         <p className="text-center">
           Your password has been changed successful. You can login with your

@@ -1,4 +1,4 @@
-import React, { useState, type ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import "../App.css";
 
 interface Props {
@@ -18,6 +18,8 @@ interface Props {
 }
 
 const Inputs = ({
+  email,
+  password,
   emailLabel = "Email",
   passwordLabel = "Password",
   emailPlaceholder = "Enter your email",
@@ -30,9 +32,6 @@ const Inputs = ({
   buttonFunc,
   className,
 }: Props) => {
-  const [emailValue, setEmailValue] = useState<string>("");
-  const [passwordValue, setPasswordValue] = useState<string>("");
-
   return (
     <>
       <div className={className}>
@@ -44,8 +43,7 @@ const Inputs = ({
             <input
               type="email"
               placeholder={emailPlaceholder}
-              value={emailValue}
-              onChange={(e) => setEmailValue(e.target.value)}
+              value={email}
               className="font-Graphik border border-gray-300 rounded-md p-2"
             />
           </>
@@ -59,8 +57,7 @@ const Inputs = ({
             <input
               type="password"
               placeholder={passwordPlaceholder}
-              value={passwordValue}
-              onChange={(e) => setPasswordValue(e.target.value)}
+              value={password}
               className="font-Graphik border border-gray-300 rounded-md p-2"
             />
           </>
