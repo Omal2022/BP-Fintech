@@ -1,7 +1,7 @@
-// Define the structure for each metric
 interface DashboardMetric {
   text: string;
   figure: number;
+  currency?: string; // optional for items that represent money
 }
 
 interface DashboardData {
@@ -13,11 +13,11 @@ interface DashboardData {
   TotalWithdraws: DashboardMetric;
 }
 
-// Export the actual data
 export const Dashboard: DashboardData = {
   TotalVolumeTransacted: {
     text: "Total Volume Transacted",
-    figure: 3430309.0,
+    figure: 3430309.00,
+    currency: "$", 
   },
   TotalUsers: {
     text: "Total Users",

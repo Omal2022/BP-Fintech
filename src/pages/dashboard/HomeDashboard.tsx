@@ -25,9 +25,13 @@ const HomeDashboard: React.FC = () => {
 
             <div className="flex flex-column flex-wrap gap-14 mt-14 w-full overflow-y-hidden ">
               {Object.entries(Dashboard).map(([key, value]) => (
-                <div key={key} className="bg-[#F2F5FF] p-4 h-[15ch] w-[20vw]  ">
-                  <h3>{value.text}</h3>
-                  <p>{value.figure.toLocaleString()}</p>
+                <div key={key} className="bg-[#F2F5FF] p-4 h-[15ch] w-[25vw]  ">
+                  <h3 className="dashboard-title">{value.text}</h3>
+                  <p className="currency-text mt-4">
+                    {value.currency
+                      ? `${value.currency}${value.figure.toLocaleString()}`
+                      : value.figure.toLocaleString()}
+                  </p>
                 </div>
               ))}
             </div>
