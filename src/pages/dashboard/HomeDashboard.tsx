@@ -5,6 +5,7 @@ import { Dashboard } from "./components/models/dashboard";
 import { RateManagement } from "./components/models/rateManagement";
 import "./components/homeDashboardStyle.css";
 import { RecentActivities } from "./components/models/recentActivity";
+import { Balance } from "./components/models/balance";
 
 const HomeDashboard: React.FC = () => {
   return (
@@ -36,49 +37,84 @@ const HomeDashboard: React.FC = () => {
               ))}
             </div>
 
-            {/* Rate Management */}
-            <section className="bg-white rounded-[8px] border-1 border-gray-200 p-8 w-[600px] mt-24">
-              <h2 className="font-semibold text-lg mb-5">Rate Management</h2>
+            <div className="flex flex-row gap-6 w-full overflow-y-hidden">
+              <section className="bg-white rounded-[8px] border-1 border-gray-200 p-8 w-[100%] mt-24">
+                <h2 className="font-semibold text-lg mb-5">Rate Management</h2>
 
-              <table className="w-full text-sm text-left border-collapse">
-                <thead className="text-gray-500 uppercase text-xs bg-[#F2F4F7] ">
-                  <tr className="h-[70px]">
-                    <th className="pb-3">Asset</th>
-                    <th className="pb-3">Buy</th>
-                    <th className="pb-3">Sell</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {RateManagement.map((item, index) => (
-                    <tr
-                      key={index}
-                      className="hover:bg-gray-50 transition-colors"
-                    >
-                      <td className="flex items-center gap-2 py-3">
-                        <img
-                          src={item.img}
-                          alt={item.country}
-                          className="w-5 h-5"
-                        />
-                        <span className="text-gray-700">{item.country}</span>
-                      </td>
-                      <td className="py-3 text-gray-700">
-                        {item.buy.toLocaleString()}
-                      </td>
-                      <td className="py-3 text-gray-700">
-                        {item.sell.toLocaleString()}
-                      </td>
+                <table className="w-full text-sm text-left border-collapse">
+                  <thead className="text-gray-500 uppercase text-xs bg-[#F2F4F7] ">
+                    <tr className="h-[70px]">
+                      <th className="pb-3">Asset</th>
+                      <th className="pb-3">Buy</th>
+                      <th className="pb-3">Sell</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </section>
+                  </thead>
+                  <tbody>
+                    {RateManagement.map((item, index) => (
+                      <tr
+                        key={index}
+                        className="hover:bg-gray-50 transition-colors"
+                      >
+                        <td className="flex items-center gap-2 py-3">
+                          <img
+                            src={item.img}
+                            alt={item.country}
+                            className="w-5 h-5"
+                          />
+                          <span className="text-gray-700">{item.country}</span>
+                        </td>
+                        <td className="py-3 text-gray-700">
+                          {item.buy.toLocaleString()}
+                        </td>
+                        <td className="py-3 text-gray-700">
+                          {item.sell.toLocaleString()}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </section>
+
+              {/*  */}
+
+              <section className=" bg-white rounded-[8px] border-1 border-gray-200 p-8 w-[100%] mt-24">
+                {" "}
+                <h2 className="font-semibold text-lg mb-5">Balance</h2>
+                <div className="flex flex-row items-center gap-6">
+                  <img
+                    src="/images/chart.svg"
+                    alt="chart icon"
+                    className="w-50 h-50"
+                  />
+                  <div>
+                    {Object.entries(Balance).map(([key, value]) => (
+                      <div
+                        key={key}
+                        className="flex flex-row gap-28 items-center mb-4"
+                      >
+                        {/* Left side: Text + Value */}
+                        <div>
+                          <h3>
+                            {value.coinName}
+                          </h3>
+                          <p>
+                            {value.currency}
+                            {value.price.toLocaleString()}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+            </div>
+            {/* Rate Management */}
 
             {/* recent activities here */}
 
             <div className="mt-24 bg-white rounded-xl border-1 border-gray-200 p-8 w-full overflow-x-auto">
               {/* Header */}
-              <div className="flex justify-between items-center mb-6">
+              <div className="flex justify-between items-center mb-6 ">
                 <h2 className="font-semibold text-lg text-gray-800">
                   Recent activity
                 </h2>
@@ -106,10 +142,10 @@ const HomeDashboard: React.FC = () => {
                   {RecentActivities.map((item, index) => (
                     <tr
                       key={index}
-                      className="border-b last:border-0 hover:bg-gray-50 transition-colors"
+                      className="border-b last:border-0 hover:bg-gray-50 transition-colors h-20"
                     >
                       <td className="py-3 px-4 text-gray-800">{item.type}</td>
-                      <td className="py-3 px-4 text-[#1D4EFF] underline cursor-pointer">
+                      <td className="py-3 px-4 text-[#1D4EFF] cursor-pointer">
                         {item.user}
                       </td>
                       <td className="py-3 px-4 text-gray-800">{item.amount}</td>

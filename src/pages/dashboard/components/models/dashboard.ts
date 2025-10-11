@@ -1,7 +1,7 @@
 interface DashboardMetric {
   text: string;
   figure: number;
-  currency?: string; // optional for items that represent money
+  currency?: string; 
 }
 
 interface DashboardData {
