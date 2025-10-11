@@ -72,7 +72,11 @@ const Inputs = ({
 
       {showActionButtons && (
         <>
-          {forgotPassword && <p>Forgot Password?</p>}
+          {forgotPassword && (
+            <p>
+              <a href="/admin/reset">Forgot Password?</a>
+            </p>
+          )}
           <button
             onClick={buttonFunc}
             className="font-Graphik border border-gray-300 rounded-md p-2 bg-[#007AFF] text-white hover:bg-[#005BB5]  transition-colors cursor-pointer"
