@@ -3,33 +3,60 @@ import Inputs from "../../components/Inputs";
 import Loader from "../../components/Loader";
 import "../../App.css";
 import { useLogin } from "../../features/handleLogin";
+import { type ValidationErrors, validateInputs } from "../../utils/validation";
+
+const simulateError = false;
 
 const AdminLoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<ValidationErrors>({});
   const { loading, handleLogin } = useLogin();
 
-  if (loading) return <Loader />;
- if (loading) return <Loader />;
- 
-  return (
-    <>
-      <section className="form-section">
-        <div className="login-container">
-          <h3>Welcome Back</h3>
-          <p>Login to your BPay account</p>
+  const onSubmit = () => {
+    const validationErrors = validateInputs(email, password);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
 
-          <Inputs
-            email=""
-            password=""
-            forgotPassword={true}
-            showEmail={true}
-            showPassword={true}
-            showActionButtons={true}
-            buttonFunc={handleLogin}
-            className="flex flex-col gap-4 w-[400px]"
-          />
-        </div>
-      </section>
-    </>
+    // Proceed with login
+    handleLogin(email, password);
+  };
+
+  if (loading) return <Loader />;
+
+  return (
+    <section className="form-section">
+      <div className="login-container">
+        <h3 className="">Welcome Back</h3>
+        <p>Login to your BPay account</p>
+
+        <Inputs
+          email={email}
+          password={password}
+          onEmailChange={setEmail}
+          onPasswordChange={setPassword}
+          forgotPassword={true}
+          showEmail={true}
+          showPassword={true}
+          showActionButtons={true}
+          buttonFunc={onSubmit}
+          className="flex flex-col gap-4 w-[400px]"
+        />
+      </div>
+
+      <div className="text-red-500 text-sm mt-2">
+        {errors.email && <p>{errors.email}</p>}
+        {errors.password && <p>{errors.password}</p>}
+      </div>
+
+      {/* Simulate an error to test Error Boundary */}
+      {simulateError &&
+        (() => {
+          throw new Error("Simulated test error");
+        })()}
+    </section>
   );
 };
 

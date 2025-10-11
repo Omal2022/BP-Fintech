@@ -11,6 +11,7 @@ import ErrorFallback from "./ErrorFallback";
 import { mapErrorToSeverity } from "../../lib/useErrorSeverity";
 import { useSelector } from "react-redux";
 
+
 interface Props {
   children: ReactNode;
 }

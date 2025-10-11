@@ -14,6 +14,8 @@ interface Props {
   button?: string | ReactNode;
   forgotPassword?: boolean;
   buttonFunc?: () => void;
+  onEmailChange?: (value: string) => void;
+  onPasswordChange?: (value: string) => void;
   className?: string | ReactNode;
 }
 
@@ -29,53 +31,57 @@ const Inputs = ({
   showActionButtons,
   button = "Login",
   forgotPassword,
+  onEmailChange,
+  onPasswordChange,
   buttonFunc,
   className,
 }: Props) => {
   return (
-    <>
-      <div className={className}>
-        {showEmail && (
-          <>
-            <label htmlFor="emailLabel" className="font-Graphik">
-              {emailLabel}:
-            </label>
-            <input
-              type="email"
-              placeholder={emailPlaceholder}
-              value={email}
-              className="font-Graphik border border-gray-300 rounded-md p-2"
-            />
-          </>
-        )}
+    <div className={className}>
+      {showEmail && (
+        <>
+          <label htmlFor="emailLabel" className="font-Graphik">
+            {emailLabel}:
+          </label>
+          <input
+            id="emailInput"
+            type="email"
+            placeholder={emailPlaceholder}
+            value={email}
+            onChange={(e) => onEmailChange?.(e.target.value)}
+            className="font-Graphik border border-gray-300 rounded-md p-2"
+          />
+        </>
+      )}
 
-        {showPassword && (
-          <>
-            <label htmlFor="passwordLabel" className="font-Graphik">
-              {passwordLabel}:
-            </label>
-            <input
-              type="password"
-              placeholder={passwordPlaceholder}
-              value={password}
-              className="font-Graphik border border-gray-300 rounded-md p-2"
-            />
-          </>
-        )}
+      {showPassword && (
+        <>
+          <label htmlFor="passwordLabel" className="font-Graphik">
+            {passwordLabel}:
+          </label>
+          <input
+            id="passwordInput"
+            type="password"
+            placeholder={passwordPlaceholder}
+            value={password}
+            onChange={(e) => onPasswordChange?.(e.target.value)}
+            className="font-Graphik border border-gray-300 rounded-md p-2"
+          />
+        </>
+      )}
 
-        {showActionButtons && (
-          <>
-            {forgotPassword && <p>Forgot Password?</p>}
-            <button
-              onClick={buttonFunc}
-              className="font-Graphik border border-gray-300 rounded-md p-2 bg-[#007AFF] text-white hover:bg-[#005BB5]  transition-colors cursor-pointer"
-            >
-              {button}
-            </button>
-          </>
-        )}
-      </div>
-    </>
+      {showActionButtons && (
+        <>
+          {forgotPassword && <p>Forgot Password?</p>}
+          <button
+            onClick={buttonFunc}
+            className="font-Graphik border border-gray-300 rounded-md p-2 bg-[#007AFF] text-white hover:bg-[#005BB5]  transition-colors cursor-pointer"
+          >
+            {button}
+          </button>
+        </>
+      )}
+    </div>
   );
 };
 

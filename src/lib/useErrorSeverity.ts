@@ -1,7 +1,9 @@
+export type Severity = "high" | "medium" | "low" | "error";
+
 /**
  * Maps an error to severity.
  */
-export function mapErrorToSeverity(error: Error): string {
+export function mapErrorToSeverity(error: Error): Severity {
   const msg = error.message.toLowerCase();
   if (error.name.includes("TypeError") || error.name.includes("ReferenceError"))
     return "high";
