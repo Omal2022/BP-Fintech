@@ -4,23 +4,23 @@ import "./sideBarStyle.css";
 
 const Sidebar: React.FC = () => {
   const navList = [
-    { href: "/", img: "/public/icons/home.svg", label: "Home" },
+    { href: "/", img: "/icons/home.svg", label: "Home" },
     {
       href: "/balance",
-      img: "/public/icons/balance.svg",
+      img: "/icons/balance.svg",
       label: "Balance",
     },
-    { href: "/users", img: "/public/icons/users.svg", label: "Users" },
+    { href: "/users", img: "/icons/users.svg", label: "Users" },
     {
       href: "/transactions",
-      img: "/public/icons/transaction.svg",
+      img: "/icons/transaction.svg",
       label: "Transaction",
     },
-    { href: "/referals", img: "/public/icons/gift.svg", label: "Referals" },
-    { href: "/premium", img: "/public/icons/premium.svg", label: "Premium" },
+    { href: "/referals", img: "/icons/gift.svg", label: "Referals" },
+    { href: "/premium", img: "/icons/premium.svg", label: "Premium" },
     {
       href: "/settings",
-      img: "/public/icons/settings.svg",
+      img: "/icons/settings.svg",
       label: "Settings",
     },
   ];

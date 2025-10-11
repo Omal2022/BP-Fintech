@@ -28,7 +28,6 @@
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
-  background-color: #fcfcfd;
+  background-color: #fcfcfc;
+  border: 1px solid #bbbbbb;
 }
-
-
