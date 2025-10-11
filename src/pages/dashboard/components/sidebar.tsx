@@ -1,0 +1,51 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import "./sideBarStyle.css";
+
+const Sidebar: React.FC = () => {
+  const navList = [
+    { href: "/", img: "/public/icons/home.svg", label: "Home" },
+    {
+      href: "/balance",
+      img: "/public/icons/balance.svg",
+      label: "Balance",
+    },
+    { href: "/users", img: "/public/icons/users.svg", label: "Users" },
+    {
+      href: "/transactions",
+      img: "/public/icons/transaction.svg",
+      label: "Transaction",
+    },
+    { href: "/referals", img: "/public/icons/gift.svg", label: "Referals" },
+    { href: "/premium", img: "/public/icons/premium.svg", label: "Premium" },
+    {
+      href: "/settings",
+      img: "/public/icons/settings.svg",
+      label: "Settings",
+    },
+  ];
+
+  return (
+    <div className="sidebar">
+      <div>
+        <img
+          src="/images/bpayLogo.png"
+          alt="Logo here"
+          className="w-[120px] mb-14"
+        />
+      </div>
+      <ul className="nav-item">
+        {navList.map((item, index) => (
+          <li key={index} className="nav-hover">
+            <Link to={item.href} className="nav-list">
+              <img src={item.img} alt={item.label} />
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default Sidebar;

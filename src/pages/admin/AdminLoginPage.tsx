@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Inputs from "../../components/Inputs";
 import Loader from "../../components/Loader";
 import "../../App.css";
-import { useLogin } from "../../features/handleLogin";
+import { useLogin } from "../../components/features/handleLogin";
 import { type ValidationErrors, validateInputs } from "../../utils/validation";
 
 const simulateError = false;
