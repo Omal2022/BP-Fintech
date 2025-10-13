@@ -1,14 +1,8 @@
-export interface RecentActivityItem {
-  type: string;
-  user: string;
-  amount: string;
-  date: string;
-  time: string;
-  status: "Completed" | "Pending" | "Failed";
-}
+import type { RecentActivityItem } from "../../../../types/dashboard";
 
-export const RecentActivities: RecentActivityItem[] = [
+export const recentActivities: RecentActivityItem[] = [
   {
+    id: "withdrawal-1",
     type: "Withdrawal",
     user: "Abdulrazeez Abdulyaniu",
     amount: "0.000343 USDT",
@@ -17,6 +11,7 @@ export const RecentActivities: RecentActivityItem[] = [
     status: "Completed",
   },
   {
+    id: "deposit-1",
     type: "Deposit",
     user: "Abdulrazeez Abdulyaniu",
     amount: "31,300.000343 USDT",
@@ -25,6 +20,7 @@ export const RecentActivities: RecentActivityItem[] = [
     status: "Completed",
   },
   {
+    id: "deposit-2",
     type: "Deposit",
     user: "Abdulrazeez Abdulyaniu",
     amount: "50,000.23 NGN",
@@ -33,6 +29,7 @@ export const RecentActivities: RecentActivityItem[] = [
     status: "Completed",
   },
   {
+    id: "savings-1",
     type: "Savings",
     user: "Abdulrazeez Abdulyaniu",
     amount: "100.03 USDT",
@@ -41,6 +38,7 @@ export const RecentActivities: RecentActivityItem[] = [
     status: "Completed",
   },
   {
+    id: "airtime-1",
     type: "Airtime",
     user: "Abdulrazeez Abdulyaniu",
     amount: "10.03 USDT",
@@ -49,6 +47,7 @@ export const RecentActivities: RecentActivityItem[] = [
     status: "Completed",
   },
   {
+    id: "data-1",
     type: "Data Subscription",
     user: "Abdulrazeez Abdulyaniu",
     amount: "5.20 USDT",
@@ -57,6 +56,7 @@ export const RecentActivities: RecentActivityItem[] = [
     status: "Completed",
   },
   {
+    id: "electricity-1",
     type: "Electricity",
     user: "Abdulrazeez Abdulyaniu",
     amount: "15.29 USDT",
@@ -65,6 +65,7 @@ export const RecentActivities: RecentActivityItem[] = [
     status: "Completed",
   },
   {
+    id: "fiat-withdrawal-1",
     type: "Fiat Withdrawal",
     user: "Abdulrazeez Abdulyaniu",
     amount: "8.49 USDT",
@@ -73,3 +74,4 @@ export const RecentActivities: RecentActivityItem[] = [
     status: "Completed",
   },
 ];
+

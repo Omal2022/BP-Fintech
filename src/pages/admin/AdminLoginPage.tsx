@@ -3,7 +3,8 @@ import Inputs from "../../components/Inputs";
 import Loader from "../../components/Loader";
 import "../../App.css";
 import { useLogin } from "../../components/features/handleLogin";
-import { type ValidationErrors, validateInputs } from "../../utils/validation";
+import { validateInputs } from "../../utils/validation";
+import type { ValidationErrors } from "../../types/auth";
 
 const simulateError = false;
 
@@ -20,8 +21,7 @@ const AdminLoginPage = () => {
       return;
     }
 
-    // Proceed with login
-    handleLogin(email, password);
+    handleLogin({ email, password });
   };
 
   if (loading) return <Loader />;
@@ -51,7 +51,6 @@ const AdminLoginPage = () => {
         {errors.password && <p>{errors.password}</p>}
       </div>
 
-      {/* Simulate an error to test Error Boundary */}
       {simulateError &&
         (() => {
           throw new Error("Simulated test error");

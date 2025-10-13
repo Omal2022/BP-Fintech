@@ -1,43 +1,36 @@
-// components/error/ErrorBoundaryWrapper.tsx
-// Purpose: Functional Error Boundary wrapper for production use.
-// Wraps app children, logs errors with context (route, userId),
-// and shows a friendly fallback UI via react-error-boundary.
-
-// import React, { FC, ReactNode } from "react"; 
+import type { ErrorInfo, ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useLocation } from "react-router-dom";
-import ErrorFallback from "./ErrorFallback";
-// import { logError } from "../../lib/errorLogger";
-import { mapErrorToSeverity } from "../../lib/useErrorSeverity";
 import { useSelector } from "react-redux";
-
+import ErrorFallback from "./ErrorFallback";
+import { mapErrorToSeverity } from "../../lib/useErrorSeverity";
+import { logError } from "../../lib/errorLogger";
+import type { RootState } from "../../store/store";
 
 interface Props {
   children: ReactNode;
 }
 
-const ErrorBoundaryWrapper: FC<Props> = ({ children }) => {
+const ErrorBoundaryWrapper = ({ children }: Props) => {
   const location = useLocation();
-  const userId = useSelector((state: any) => state.user?.id || null);
+  const userId = useSelector((state: RootState) => state.auth.user);
 
-  const handleError = (error: Error, info: { componentStack?: string }) => {
-    const payload = {
+  const handleError = (error: Error, info: ErrorInfo) => {
+    logError({
       timestamp: new Date().toISOString(),
       route: location.pathname,
       userId,
       errorName: error.name,
       errorMessage: error.message,
       stack: error.stack,
-      componentStack: info.componentStack,
-      severity: mapErrorToSeverity(error, info),
-    };
+      componentStack: info.componentStack ?? undefined,
+      severity: mapErrorToSeverity(error),
+    });
 
-    logError(payload);
-    console.warn("We encountered an issue — it has been logged.");
+    console.warn("We encountered an issue. It has been logged.");
   };
 
   const handleReset = () => {
-    console.log("Retrying failed section...");
     window.location.reload();
   };
 

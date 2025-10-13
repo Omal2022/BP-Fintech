@@ -1,14 +1,5 @@
 import React from "react";
-
-interface ButtonProps {
-  btnFunc?: () => void;
-  bgColor?: string;
-  txColor?: string;
-  clsName?: string;
-  children?: React.ReactNode;
-  width?: string | number;
-  height?: string | number;
-}
+import type { ButtonProps } from "../types/components";
 
 const Button = ({
   btnFunc,

@@ -1,13 +1,12 @@
-import React from "react";
 import Sidebar from "./components/sidebar/sidebar";
 import Navbar from "./components/navbar/navbar";
-import { Dashboard } from "./components/models/dashboard";
-import { RateManagement } from "./components/models/rateManagement";
+import { dashboardMetrics } from "./components/models/dashboard";
+import { rateManagement } from "./components/models/rateManagement";
 import "./components/homeDashboardStyle.css";
-import { RecentActivities } from "./components/models/recentActivity";
-import { Balance } from "./components/models/balance";
+import { recentActivities } from "./components/models/recentActivity";
+import { balances } from "./components/models/balance";
 
-const HomeDashboard: React.FC = () => {
+const HomeDashboard = () => {
   return (
     <div className="dashboard-container">
       <aside className="sidebar">
@@ -19,19 +18,18 @@ const HomeDashboard: React.FC = () => {
           <Navbar />
         </header>
 
-        {/* content area  */}
         <main className="content-area">
           <div>
             <h1>Dashboard</h1>
 
             <div className="flex flex-column flex-wrap gap-14 mt-14 w-full overflow-y-hidden ">
-              {Object.entries(Dashboard).map(([key, value]) => (
-                <div key={key} className="bg-[#F2F5FF] p-4 h-[15ch] w-[25vw]  ">
-                  <h3 className="dashboard-title">{value.text}</h3>
+              {dashboardMetrics.map((metric) => (
+                <div key={metric.id} className="bg-[#F2F5FF] p-4 h-[15ch] w-[25vw]">
+                  <h3 className="dashboard-title">{metric.text}</h3>
                   <p className="currency-text mt-4">
-                    {value.currency
-                      ? `${value.currency}${value.figure.toLocaleString()}`
-                      : value.figure.toLocaleString()}
+                    {metric.currency
+                      ? `${metric.currency}${metric.figure.toLocaleString()}`
+                      : metric.figure.toLocaleString()}
                   </p>
                 </div>
               ))}
@@ -50,56 +48,32 @@ const HomeDashboard: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {RateManagement.map((item, index) => (
-                      <tr
-                        key={index}
-                        className="hover:bg-gray-50 transition-colors"
-                      >
+                    {rateManagement.map((item) => (
+                      <tr key={item.id} className="hover:bg-gray-50 transition-colors">
                         <td className="flex items-center gap-2 py-3">
-                          <img
-                            src={item.img}
-                            alt={item.country}
-                            className="w-5 h-5"
-                          />
+                          <img src={item.img} alt={item.country} className="w-5 h-5" />
                           <span className="text-gray-700">{item.country}</span>
                         </td>
-                        <td className="py-3 text-gray-700">
-                          {item.buy.toLocaleString()}
-                        </td>
-                        <td className="py-3 text-gray-700">
-                          {item.sell.toLocaleString()}
-                        </td>
+                        <td className="py-3 text-gray-700">{item.buy.toLocaleString()}</td>
+                        <td className="py-3 text-gray-700">{item.sell.toLocaleString()}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </section>
 
-              {/*  */}
-
-              <section className=" bg-white rounded-[8px] border-1 border-gray-200 p-8 w-[100%] mt-24">
-                {" "}
+              <section className="bg-white rounded-[8px] border-1 border-gray-200 p-8 w-[100%] mt-24">
                 <h2 className="font-semibold text-lg mb-5">Balance</h2>
                 <div className="flex flex-row items-center gap-6">
-                  <img
-                    src="/images/chart.svg"
-                    alt="chart icon"
-                    className="w-50 h-50"
-                  />
+                  <img src="/images/chart.svg" alt="chart icon" className="w-50 h-50" />
                   <div>
-                    {Object.entries(Balance).map(([key, value]) => (
-                      <div
-                        key={key}
-                        className="flex flex-row gap-28 items-center mb-4"
-                      >
-                        {/* Left side: Text + Value */}
+                    {balances.map((currency) => (
+                      <div key={currency.id} className="flex flex-row gap-28 items-center mb-4">
                         <div>
-                          <h3>
-                            {value.coinName}
-                          </h3>
+                          <h3>{currency.coinName}</h3>
                           <p>
-                            {value.currency}
-                            {value.price.toLocaleString()}
+                            {currency.currency}
+                            {currency.price.toLocaleString()}
                           </p>
                         </div>
                       </div>
@@ -108,24 +82,17 @@ const HomeDashboard: React.FC = () => {
                 </div>
               </section>
             </div>
-            {/* Rate Management */}
-
-            {/* recent activities here */}
 
             <div className="mt-24 bg-white rounded-xl border-1 border-gray-200 p-8 w-full overflow-x-auto">
-              {/* Header */}
               <div className="flex justify-between items-center mb-6 ">
-                <h2 className="font-semibold text-lg text-gray-800">
-                  Recent activity
-                </h2>
+                <h2 className="font-semibold text-lg text-gray-800">Recent activity</h2>
 
                 <button className="flex items-center gap-2 text-sm text-gray-600 border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 transition">
                   This Week
-                  <img src="/public/icons/dropdown.svg" alt="dropdown" />
+                  <img src="/icons/dropdown.svg" alt="dropdown" />
                 </button>
               </div>
 
-              {/* Table */}
               <table className="w-full text-sm text-left border-collapse">
                 <thead className="bg-[#F2F4F7] text-gray-600 uppercase text-xs">
                   <tr>
@@ -139,36 +106,28 @@ const HomeDashboard: React.FC = () => {
                 </thead>
 
                 <tbody>
-                  {RecentActivities.map((item, index) => (
+                  {recentActivities.map((item) => (
                     <tr
-                      key={index}
+                      key={item.id}
                       className="border-b last:border-0 hover:bg-gray-50 transition-colors h-20"
                     >
                       <td className="py-3 px-4 text-gray-800">{item.type}</td>
-                      <td className="py-3 px-4 text-[#1D4EFF] cursor-pointer">
-                        {item.user}
-                      </td>
+                      <td className="py-3 px-4 text-[#1D4EFF] cursor-pointer">{item.user}</td>
                       <td className="py-3 px-4 text-gray-800">{item.amount}</td>
                       <td className="py-3 px-4 text-gray-700">
-                        {item.date} &nbsp; • &nbsp; {item.time}
+                        {item.date} &nbsp; | &nbsp; {item.time}
                       </td>
                       <td className="py-3 px-4">
                         <span className="flex items-center gap-2">
                           <span className="flex items-center justify-center w-5 h-5 rounded-full bg-green-100">
-                            <img
-                              src="/public/icons/check.svg"
-                              alt="status"
-                              className="w-3 h-3"
-                            />
+                            <img src="/icons/check.svg" alt="status" className="w-3 h-3" />
                           </span>
-                          <span className="text-green-600 font-medium">
-                            {item.status}
-                          </span>
+                          <span className="text-green-600 font-medium">{item.status}</span>
                         </span>
                       </td>
                       <td className="py-3 px-4">
                         <img
-                          src="/public/icons/dots-vertical.svg"
+                          src="/icons/dots-vertical.svg"
                           alt="options"
                           className="w-5 h-5 cursor-pointer"
                         />

@@ -1,29 +1,24 @@
-/* Root container with sidebar and content area */
 .dashboard-container {
   display: grid;
-  grid-template-columns: 240px 1fr; /* sidebar + main area */
+  grid-template-columns: 240px 1fr;
   height: 100vh;
   background-color: #f9fafb;
 }
 
-/* Sidebar styling */
 .sidebar {
   color: #fff;
 }
 
-/* Main content wrapper (top + main) */
 .main-content {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-/* Navbar (top bar) */
 .navbar {
   flex-shrink: 0;
 }
 
-/* Dashboard main area */
 .content-area {
   flex: 1;
   padding: 2rem;

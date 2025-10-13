@@ -1,13 +1,5 @@
 @import "tailwindcss";
 
-/* @font-face {
-  font-family: "Graphik";
-  src: url("/fonts/Graphik-Regular.woff2") format("woff2"),
-    url("/fonts/Graphik-Regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-} */
-
 h3 {
   font-family: Graphik, sans-serif;
   font-weight: 600;
@@ -22,7 +14,6 @@ p {
   color: #475467;
 }
 
-/* ---- Common Styles ---- */
 .form-section {
   position: relative;
   width: 100%;
@@ -33,7 +24,6 @@ p {
   background-color: #f9fafb;
 }
 
-/* ---- PasswordSuccessfulPage ---- */
 .passwordSuccessful-container {
   display: flex;
   flex-direction: column;
@@ -50,7 +40,6 @@ p {
   padding: 32px;
 }
 
-/* ---- AdminLoginPage ---- */
 .login-container {
   display: flex;
   flex-direction: column;
@@ -67,7 +56,6 @@ p {
   padding: 32px;
 }
 
-/* ---- ResetPasswordPage ---- */
 .resetPassword-container {
   display: flex;
   flex-direction: column;
@@ -83,7 +71,6 @@ p {
   border-radius: 8px;
   padding: 32px;
 }
-/* ---- ForgotPasswordPage ---- */
 .newPassword-container {
   display: flex;
   flex-direction: column;

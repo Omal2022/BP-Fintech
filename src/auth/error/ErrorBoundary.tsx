@@ -1,9 +1,3 @@
-/**
- * components/error/ErrorBoundary.tsx
- * Purpose: Demonstrates how React class-based Error Boundaries work.
- * Only class components can catch render errors.
- */
-
 import React, { Component, ErrorInfo, ReactNode } from "react";
 
 interface Props {

@@ -1,6 +1,3 @@
-/**
- * User-friendly fallback UI when an error occurs.
- */
 import React from "react";
 
 interface Props {

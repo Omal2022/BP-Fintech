@@ -1,6 +1,5 @@
 import React from "react";
 import Inputs from "../../components/Inputs";
-const simulateError = false;
 
 const AdminNewPassword: React.FC = () => {
   return (
@@ -22,15 +21,9 @@ const AdminNewPassword: React.FC = () => {
             showActionButtons={true}
           />
         </div>
-
-        {/* Simulate an error to test Error Boundary */}
-        {simulateError &&
-          (() => {
-            throw new Error("Simulated test error");
-          })()}
-      </section>
-    </>
-  );
+     </section>
+   </>
+ );
 };
 
 export default AdminNewPassword;

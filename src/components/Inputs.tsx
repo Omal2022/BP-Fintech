@@ -1,23 +1,6 @@
-import React, { type ReactNode } from "react";
+import React from "react";
 import "../App.css";
-
-interface Props {
-  email?: string;
-  password?: string | number;
-  emailLabel?: string;
-  passwordLabel?: string;
-  emailPlaceholder?: string;
-  passwordPlaceholder?: string;
-  showEmail?: boolean;
-  showPassword?: boolean;
-  showActionButtons?: boolean;
-  button?: string | ReactNode;
-  forgotPassword?: boolean;
-  buttonFunc?: () => void;
-  onEmailChange?: (value: string) => void;
-  onPasswordChange?: (value: string) => void;
-  className?: string | ReactNode;
-}
+import type { InputsProps } from "../types/components";
 
 const Inputs = ({
   email,
@@ -35,7 +18,7 @@ const Inputs = ({
   onPasswordChange,
   buttonFunc,
   className,
-}: Props) => {
+}: InputsProps) => {
   return (
     <div className={className}>
       {showEmail && (

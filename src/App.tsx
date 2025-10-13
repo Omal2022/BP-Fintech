@@ -1,11 +1,7 @@
 import { Suspense, lazy } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Loader from "./components/Loader";
-// import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
-// import { type RootState } from "./store/store";
 
-// Lazy imports for pages
 const AdminLoginPage = lazy(() => import("./pages/admin/AdminLoginPage"));
 const AdminVerificationCode = lazy(
   () => import("./pages/admin/AdminVerificationCode")
@@ -18,8 +14,6 @@ const AdminPasswordSuccessful = lazy(
   () => import("./pages/admin/AdminPasswordSuccessful")
 );
 const HomeDashboard = lazy(() => import("./pages/dashboard/HomeDashboard"));
-
-// HomeDashboard from "./pages/dashboard/HomeDashboard";
 
 const App = () => {
   return (
@@ -75,13 +69,17 @@ const App = () => {
           </ProtectedRoute>
         }
       />
+
+      <Route path="/admin/login" element={<Navigate to="/" replace />} />
+
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  return isLoggedIn ? children : <Navigate to="/admin/login" replace />;
+  return isLoggedIn ? children : <Navigate to="/" replace />;
 }
 
 export default App;
