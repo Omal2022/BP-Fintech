@@ -1,6 +1,6 @@
 import { type DashboardMetric } from "../../../../types/dashboard";
 
-export const dashboardMetric: DashboardMetric = [
+export const dashboardMetric: DashboardMetric[] = [
   {
     id: "totalVolumeTransacted",
     text: "Total Volume Transacted",

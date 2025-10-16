@@ -13,14 +13,14 @@ export interface ButtonProps {
   height?: string | number;
   display?: string;
   justifyContent?: string;
-  alignItems: string;
+  alignItems?: string;
   gap?: string | number;
   flexDirection?: string;
 }
 
 export interface InputsProps {
   email?: string;
-  password?: string | number;
+  password?: string | number; 
   emailLabel?: string;
   passwordLabel?: string;
   emailPlaceholder?: string;

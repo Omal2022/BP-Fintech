@@ -1,9 +1,9 @@
+// ✅ Correct: type-only imports for TypeScript 5+ with verbatimModuleSyntax
 import type { ErrorInfo, ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ErrorFallback from "./ErrorFallback";
-// import { logError } from "../../lib/errorLogger";
 import { mapErrorToSeverity } from "../../lib/useErrorSeverity";
 import { logError } from "../../lib/errorLogger";
 import type { RootState } from "../../store/store";

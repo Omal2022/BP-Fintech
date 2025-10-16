@@ -1,8 +1,3 @@
-export interface ValidationErrors {
-  email?: string;
-  password?: string;
-}
-
 import type { ValidationErrors } from "../types/auth";
 
 
