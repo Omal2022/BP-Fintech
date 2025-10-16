@@ -81,7 +81,7 @@ const App = () => {
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  return isLoggedIn ? children : <Navigate to="/admin/login" replace />;
+  return isLoggedIn ? children : <Navigate to="/admin/dashboard" replace />;
 }
 
 export default App;
