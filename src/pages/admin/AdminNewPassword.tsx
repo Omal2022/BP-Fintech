@@ -1,11 +1,16 @@
 import React from "react";
-import Inputs from "../../components/Inputs";
+import Inputs from "../../components/UI/Inputs";
+import AdminNavbar from "../../components/UI/AdminNavbar";
 const simulateError = false;
 
 const AdminNewPassword: React.FC = () => {
   return (
     <>
-      <section className="form-section">
+      <section className="form-section flex flex-col relative">
+        
+      <div className="absolute top-0">
+        <AdminNavbar/>
+      </div>
         <div className="newPassword-container ">
           <h3>Admin New Password</h3>
           <Inputs

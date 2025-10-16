@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { type LoginCredentials } from "../../types/auth";
 
 export const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (email: string, password: string) => {
+  const handleLogin = async ({ email, password }: LoginCredentials) => {
     setLoading(true);
-    console.log("Logging in with", email, password); // Placeholder for actual login logic
+    console.log("Logging in with", email, password); 
 
     // Simulate an API call
     try {

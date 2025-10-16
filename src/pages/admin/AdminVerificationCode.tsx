@@ -1,5 +1,5 @@
 import React from "react";
-import Inputs from "../../components/Inputs";
+import Inputs from "../../components/UI/Inputs";
 
 const AdminVerificationCode: React.FC = () => {
   return (

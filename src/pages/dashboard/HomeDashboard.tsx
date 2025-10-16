@@ -1,11 +1,14 @@
 import React from "react";
-import Sidebar from "./components/sidebar/sidebar";
-import Navbar from "./components/navbar/navbar";
-import { Dashboard } from "./components/models/dashboard";
-import { RateManagement } from "./components/models/rateManagement";
+import Sidebar from "../sidebar/sidebar";
+import Navbar from "../navbar/navbar";
+import { dashboardMetric } from "./components/mockdata/dashboard";
+import { RateManagement } from "./components/mockdata/rateManagement";
 import "./components/homeDashboardStyle.css";
-import { RecentActivities } from "./components/models/recentActivity";
-import { Balance } from "./components/models/balance";
+import { RecentActivities } from "./components/mockdata/recentActivity";
+import { Balance } from "./components/mockdata/balance";
+import type { DashboardMetric } from "../../types/dashboard";
+import Button from "../../components/UI/Button";
+import "../../App.css";
 
 const HomeDashboard: React.FC = () => {
   return (
@@ -25,53 +28,78 @@ const HomeDashboard: React.FC = () => {
             <h1>Dashboard</h1>
 
             <div className="flex flex-column flex-wrap gap-14 mt-14 w-full overflow-y-hidden ">
-              {Object.entries(Dashboard).map(([key, value]) => (
-                <div key={key} className="bg-[#F2F5FF] p-4 h-[15ch] w-[25vw]  ">
+              {dashboardMetric.map((value: DashboardMetric) => (
+                <div
+                  key={value.id}
+                  className="bg-[#F2F5FF] p-[24px] h-[15ch] w-[25vw]  "
+                >
                   <h3 className="dashboard-title">{value.text}</h3>
                   <p className="currency-text mt-4">
                     {value.currency
-                      ? `${value.currency}${value.figure.toLocaleString()}`
-                      : value.figure.toLocaleString()}
+                      ? `${value.currency}${value.figure.toLocaleString(
+                          undefined,
+                          { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+                        )}`
+                      : value.figure.toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
                   </p>
                 </div>
               ))}
             </div>
 
+            {/* Rate Management */}
             <div className="flex flex-row gap-6 w-full overflow-y-hidden">
-              <section className="bg-white rounded-[8px] border-1 border-gray-200 p-8 w-[100%] mt-24">
-                <h2 className="font-semibold text-lg mb-5">Rate Management</h2>
+              <section className="bg-white rounded-[8px] border-1 border-gray-200 w-[100%] mt-24">
+                <h2 className="font-semibold text-[20px] p-8">
+                  Rate Management
+                </h2>
 
                 <table className="w-full text-sm text-left border-collapse">
-                  <thead className="text-gray-500 uppercase text-xs bg-[#F2F4F7] ">
-                    <tr className="h-[70px]">
-                      <th className="pb-3">Asset</th>
-                      <th className="pb-3">Buy</th>
-                      <th className="pb-3">Sell</th>
+                  <thead className="uppercase text-xs bg-[#F2F4F7] ">
+                    <tr className="h-[70px] text-gray-500 ">
+                      <td className="pl-6 text-[#667085] ">Asset</td>
+                      <td className="text-[#667085] ">Buy</td>
+                      <td className="text-[#667085] ">Sell</td>
                     </tr>
                   </thead>
+
                   <tbody>
                     {RateManagement.map((item, index) => (
                       <tr
                         key={index}
                         className="hover:bg-gray-50 transition-colors"
                       >
-                        <td className="flex items-center gap-2 py-3">
+                        <td className="flex items-center gap-2 py-3 pl-6 font-graphik font-normal text-sm text-black">
                           <img
                             src={item.img}
                             alt={item.country}
-                            className="w-5 h-5"
+                            className="w-12 h-12 "
                           />
-                          <span className="text-gray-700">{item.country}</span>
+                          <span className="country py-3 font-graphik font-normal text-sm text-black">
+                            {item.country}
+                          </span>
                         </td>
-                        <td className="py-3 text-gray-700">
+                        <td className="py-3 font-graphik font-normal text-sm text-black">
                           {item.buy.toLocaleString()}
                         </td>
-                        <td className="py-3 text-gray-700">
+                        <td className="py-3 font-graphik font-normal text-sm text-black">
                           {item.sell.toLocaleString()}
                         </td>
                       </tr>
                     ))}
                   </tbody>
+                  <Button
+                    width={"167%"}
+                    bgColor="#ffff"
+                    border="1px solid #EAECF0"
+                    txColor="#000000"
+                    padding="20px"
+                    margin="8px"
+                  >
+                    Manage all
+                  </Button>
                 </table>
               </section>
 
@@ -79,36 +107,68 @@ const HomeDashboard: React.FC = () => {
 
               <section className=" bg-white rounded-[8px] border-1 border-gray-200 p-8 w-[100%] mt-24">
                 {" "}
-                <h2 className="font-semibold text-lg mb-5">Balance</h2>
-                <div className="flex flex-row items-center gap-6">
+                <h2 className="font-semibold text-[20px] mb-5">Balance</h2>
+                <div className="flex flex-row items-center  mt-[60px]">
                   <img
                     src="/images/chart.svg"
                     alt="chart icon"
-                    className="w-50 h-50"
+                    className="w-60 h-60 mr-[50px]"
                   />
+
                   <div>
-                    {Object.entries(Balance).map(([key, value]) => (
+                    {Balance.map((item) => (
                       <div
-                        key={key}
-                        className="flex flex-row gap-28 items-center mb-4"
+                        key={item.id}
+                        className="flex flex-row items-center justify-between mb-4"
                       >
-                        {/* Left side: Text + Value */}
-                        <div>
-                          <h3>
-                            {value.coinName}
-                          </h3>
-                          <p>
-                            {value.currency}
-                            {value.price.toLocaleString()}
+                        {/* Left section: Coin info (stacked) */}
+                        <div className="flex flex-col">
+                          {/* Coin name */}
+                          <p className="flex items-center gap-2 text-gray-800">
+                            <img
+                              src={item.coin.img}
+                              alt={item.coin.alt}
+                              className="w-3 h-3"
+                            />
+                            {item.coin.coinName}
                           </p>
+
+                          {/* Amount + Percentage on same row */}
+                          <div className="flex items-center justify-between w-[400px] mt-1">
+                            {/* Amount */}
+                            <h3 className="blanceFigure text-gray-900 font-semibold">
+                              {item.amount.currency}
+                              {item.amount.figure.toLocaleString()}
+                            </h3>
+
+                            {/* Percentage box */}
+                            <div
+                              className={`h-[35px] w-[55px] flex items-center justify-center rounded-[8px] font-semibold text-[16px] ${
+                                item.amount.percentage > 30
+                                  ? "bg-gray-200 text-[#667085]"
+                                  : "bg-red-500 text-white"
+                              }`}
+                            >
+                              {item.amount.percentage}%
+                            </div>
+                          </div>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
+                <Button
+                  width={"100%"}
+                  bgColor="#ffff"
+                  border="1px solid #EAECF0"
+                  txColor="#000000"
+                  padding="20px"
+                  margin="8px"
+                >
+                  Manage all
+                </Button>
               </section>
             </div>
-            {/* Rate Management */}
 
             {/* recent activities here */}
 

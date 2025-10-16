@@ -3,6 +3,9 @@ export interface ValidationErrors {
   password?: string;
 }
 
+import type { ValidationErrors } from "../types/auth";
+
+
 /**
  * Validate email and password inputs
  * @param email - The user's email input

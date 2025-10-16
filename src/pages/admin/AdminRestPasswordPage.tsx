@@ -1,10 +1,14 @@
 import React from "react";
-import Inputs from "../../components/Inputs";
+import Inputs from "../../components/UI/Inputs";
+import AdminNavbar from "../../components/UI/AdminNavbar";
 
 const AdminRestPasswordPage: React.FC = () => {
   return (
     <>
-      <section className="form-section">
+      <section className="form-section  flex flex-col relative">
+        <div className="absolute top-0">
+          <AdminNavbar />
+        </div>
         <div className="resetPassword-container">
           <h3>Reset password</h3>
           <p>

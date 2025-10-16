@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import Inputs from "../../components/Inputs";
-import Loader from "../../components/Loader";
+import Inputs from "../../components/UI/Inputs";
+import Loader from "../../components/UI/Loader";
 import "../../App.css";
 import { useLogin } from "../../components/features/handleLogin";
-import { type ValidationErrors, validateInputs } from "../../utils/validation";
+import { type ValidationErrors } from "../../types/auth";
+import { validateInputs } from "../../utils/validation";
+import AdminNavbar from "../../components/UI/AdminNavbar";
 
 const simulateError = false;
 
@@ -19,15 +21,19 @@ const AdminLoginPage = () => {
       setErrors(validationErrors);
       return;
     }
+    setErrors({});
 
     // Proceed with login
-    handleLogin(email, password);
+    handleLogin({ email, password });
   };
 
   if (loading) return <Loader />;
 
   return (
-    <section className="form-section">
+    <section className="form-section flex flex-col relative">
+      <div className="absolute top-0">
+        <AdminNavbar/>
+      </div>
       <div className="login-container">
         <h3 className="">Welcome Back</h3>
         <p>Login to your BPay account</p>
