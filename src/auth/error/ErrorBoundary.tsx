@@ -1,48 +1,51 @@
-/**
- * components/error/ErrorBoundary.tsx
- * Purpose: Demonstrates how React class-based Error Boundaries work.
- * Only class components can catch render errors.
- */
 
-import React, { Component, ErrorInfo, ReactNode } from "react";
+import type { ErrorInfo, ReactNode } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+// import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ErrorFallback from "./ErrorFallback";
+import { mapErrorToSeverity } from "../../lib/useErrorSeverity";
+import { logError } from "../../lib/errorLogger";
+import type { RootState } from "../../store/store";
 
 interface Props {
   children: ReactNode;
 }
 
-interface State {
-  hasError: boolean;
-  error?: Error;
-  info?: ErrorInfo;
-}
+const ErrorBoundaryWrapper = ({ children }: Props) => {
+  const userId = useSelector((state: RootState) => state.auth.user);
 
-class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { hasError: false };
-  }
 
-  static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
-  }
+  const handleError = (error: Error, info: ErrorInfo) => {
+    logError({
+      timestamp: new Date().toISOString(),
+      route: location.pathname,
+      userId,
+      errorName: error.name,
+      errorMessage: error.message,
+      stack: error.stack,
+      componentStack: info.componentStack ?? undefined,
+      severity: mapErrorToSeverity(error),
+    });
 
-  componentDidCatch(error: Error, info: ErrorInfo) {
-    console.error("ErrorBoundary caught:", error, info);
-  }
+    console.warn("We encountered an issue. It has been logged.");
+  };
 
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div role="alert" className="p-4 text-center">
-          <h2>Something went wrong.</h2>
-          <p>Please reload or try again later.</p>
-          <button onClick={() => window.location.reload()}>Reload</button>
-        </div>
-      );
-    }
+  const handleReset = () => {
+    console.log("Retrying failed section...");
+    window.location.reload();
+  };
 
-    return this.props.children;
-  }
-}
+  return (
+    <ErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onError={handleError}
+      onReset={handleReset}
+      resetKeys={[location.pathname]}
+    >
+      {children}
+    </ErrorBoundary>
+  );
+};
 
-export default ErrorBoundary;
+export default ErrorBoundaryWrapper;
