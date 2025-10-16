@@ -1,8 +1,7 @@
 import { Suspense, lazy } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes ,  Navigate  } from "react-router-dom";
 import Loader from "./components/UI/Loader";
 // import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 // import { type RootState } from "./store/store";
 
 // Lazy imports for pages
@@ -75,13 +74,18 @@ const App = () => {
           </ProtectedRoute>
         }
       />
+
+      <Route path="/admin/login" element={<Navigate to="/" replace />} />
+
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  return isLoggedIn ? children : <Navigate to="/admin/dashboard" replace />;
+  // return isLoggedIn ? children : <Navigate to="/admin/login" replace />;
+  return isLoggedIn ? children : <Navigate to="/" replace />;
 }
 
 export default App;
