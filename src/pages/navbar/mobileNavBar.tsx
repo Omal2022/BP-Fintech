@@ -11,7 +11,7 @@ const MobileNavBar = () => {
       {/* Header / Logo Section */}
       <div
         className={`bg-[#F2F4F7] w-full transition-all ease-in-out duration-500 ${
-          isOpen ? "h-screen" : "h-[70px]"
+          isOpen ? "h-screen" : "h-[50px]"
         }`}
       >
         <img

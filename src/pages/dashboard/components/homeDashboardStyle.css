@@ -28,8 +28,8 @@
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
-  background-color: #fcfcfc;
-  border: 1px solid #bbbbbb;
+  background-color: #fcfcfd;
+  border: 1px solid #d0d5dd;
 }
 .currency-text {
   font-family: Graphik, sans-serif;
