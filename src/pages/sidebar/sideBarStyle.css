@@ -28,6 +28,12 @@
   color: inherit;
 }
 
+/* @media (max-width: 1000px) {
+  .sidebar {
+    display: none;
+  }
+} */
+
 /* .nav-hover:hover {
   background: white;
   color: black;

@@ -9,36 +9,44 @@ import { Balance } from "./components/mockdata/balance";
 import type { DashboardMetric } from "../../types/dashboard";
 import Button from "../../components/UI/Button";
 import "../../App.css";
+import MobileNavBar from "../navbar/mobileNavBar";
 
 const HomeDashboard: React.FC = () => {
   return (
     <div className="dashboard-container">
-      <aside className="sidebar">
+      <aside className="sidebar lg:block md:hidden hidden">
         <Sidebar />
       </aside>
 
       <div className="main-content">
-        <header className="navbar">
+        <header className="navbar lg:block md:hidden hidden">
           <Navbar />
         </header>
+
+        <div className=" lg:hidden md:block block">
+          <MobileNavBar />
+        </div>
 
         {/* content area  */}
         <main className="content-area">
           <div>
             <h1>Dashboard</h1>
 
-            <div className="flex flex-column flex-wrap gap-14 mt-14 w-full overflow-y-hidden ">
+            <div className="flex flex-col lg:justify-between md:justify-between md:flex-row lg:flex-row flex-wrap gap-6 mt-14 w-full overflow-y-hidden">
               {dashboardMetric.map((value: DashboardMetric) => (
                 <div
                   key={value.id}
-                  className="bg-[#F2F5FF] p-[24px] h-[15ch] w-[25vw]  "
+                  className="bg-[#F2F5FF] p-6 h-[15ch] w-full md:w-[45%] lg:w-[25vw] rounded-lg "
                 >
                   <h3 className="dashboard-title">{value.text}</h3>
                   <p className="currency-text mt-4">
                     {value.currency
                       ? `${value.currency}${value.figure.toLocaleString(
                           undefined,
-                          { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+                          {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          }
                         )}`
                       : value.figure.toLocaleString(undefined, {
                           minimumFractionDigits: 2,
@@ -50,7 +58,7 @@ const HomeDashboard: React.FC = () => {
             </div>
 
             {/* Rate Management */}
-            <div className="flex flex-row gap-6 w-full overflow-y-hidden">
+            <div className="flex flex-col md:flex-col lg:flex-row gap-6 w-full overflow-y-hidden">
               <section className="bg-white rounded-[8px] border-1 border-gray-200 w-[100%] mt-24">
                 <h2 className="font-semibold text-[20px] p-8">
                   Rate Management
@@ -104,26 +112,26 @@ const HomeDashboard: React.FC = () => {
               </section>
 
               {/*  */}
-
-              <section className=" bg-white rounded-[8px] border-1 border-gray-200 p-8 w-[100%] mt-24">
-                {" "}
+              <section className="bg-white rounded-[8px] border border-gray-200 p-6 w-full mt-24">
                 <h2 className="font-semibold text-[20px] mb-5">Balance</h2>
-                <div className="flex flex-row items-center  mt-[60px]">
+
+                <div className="flex flex-col md:flex-row lg:flex-row items-center md:items-start gap-8 mt-10">
+                  {/* Chart */}
                   <img
                     src="/images/chart.svg"
                     alt="chart icon"
-                    className="w-60 h-60 mr-[50px]"
+                    className="w-60 h-60 md:mr-8"
                   />
 
-                  <div>
+                  {/* Balances List */}
+                  <div className="w-full md:w-auto">
                     {Balance.map((item) => (
                       <div
                         key={item.id}
-                        className="flex flex-row items-center justify-between mb-4"
+                        className="flex flex-col md:flex-row items-center md:items-start justify-between bg-gray-50 lg:border-b-2  lg:rounded-none lg:bg-transparent mb-4 p-4 rounded-md"
                       >
-                        {/* Left section: Coin info (stacked) */}
-                        <div className="flex flex-col">
-                          {/* Coin name */}
+                        {/* Coin Info */}
+                        <div className="flex flex-col w-full md:w-[380px] lg:w-[380px]">
                           <p className="flex items-center gap-2 text-gray-800">
                             <img
                               src={item.coin.img}
@@ -133,15 +141,13 @@ const HomeDashboard: React.FC = () => {
                             {item.coin.coinName}
                           </p>
 
-                          {/* Amount + Percentage on same row */}
-                          <div className="flex items-center justify-between w-[400px] mt-1">
-                            {/* Amount */}
+                          {/* Amount + Percentage */}
+                          <div className="flex items-center justify-between w-full mt-2">
                             <h3 className="blanceFigure text-gray-900 font-semibold">
                               {item.amount.currency}
                               {item.amount.figure.toLocaleString()}
                             </h3>
 
-                            {/* Percentage box */}
                             <div
                               className={`h-[35px] w-[55px] flex items-center justify-center rounded-[8px] font-semibold text-[16px] ${
                                 item.amount.percentage > 30
@@ -157,9 +163,10 @@ const HomeDashboard: React.FC = () => {
                     ))}
                   </div>
                 </div>
+
                 <Button
                   width={"100%"}
-                  bgColor="#ffff"
+                  bgColor="#fff"
                   border="1px solid #EAECF0"
                   txColor="#000000"
                   padding="20px"

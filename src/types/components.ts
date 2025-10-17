@@ -42,3 +42,4 @@ export interface NavItem {
   label: string;
   color?: boolean;
 }
+

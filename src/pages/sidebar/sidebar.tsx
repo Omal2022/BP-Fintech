@@ -30,6 +30,7 @@ const navList: NavItem[] = [
     color: true,
   },
 ];
+
 const Sidebar: React.FC = () => {
   return (
     <div className="sidebar">

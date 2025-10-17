@@ -31,7 +31,6 @@
   background-color: #fcfcfc;
   border: 1px solid #bbbbbb;
 }
-
 .currency-text {
   font-family: Graphik, sans-serif;
   font-weight: 600;
@@ -43,4 +42,38 @@
   font-size: 16px;
   font-style: medium;
   color: #1d2939;
+}
+
+/* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+
+/* Mobile View: Stack everything vertically */
+@media (max-width: 1000px) {
+  .dashboard-container {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+    height: auto;
+  }
+
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    order: 2;
+  }
+
+  .content-area {
+    width: 100%;
+    flex: 1;
+    padding: 1rem;
+    background-color: #fcfcfc;
+    border: none;
+    overflow-y: visible; /* remove scroll on mobile for smoother feel */
+  }
+
+  /* Optional: make your sections stack with spacing */
+  .content-area > div,
+  .content-area > section {
+    margin-bottom: 2rem;
+  }
 }
